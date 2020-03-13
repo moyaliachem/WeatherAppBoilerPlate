@@ -7,22 +7,12 @@
 
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
+import Moment from 'moment';
 import { Li, Span, Img, Ul } from './styledComponents';
 // import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
 function WeatherList({ weathers }) {
-  const fullDate = new Date();
-  const day = fullDate.getDay();
-  const dayToday = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday ',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ];
   let counter = 0;
 
   return (
@@ -30,7 +20,12 @@ function WeatherList({ weathers }) {
       <h2>Weather</h2>
       {
         <Ul>
-          {weathers.map((weatherList, index) => {
+          {weathers.map(weatherList => {
+            const fullDate = new Date();
+            const dt = Moment(fullDate, 'YYYY-MM-DD HH:mm:ss').add(
+              counter++,
+              'days',
+            );
             const {
               id,
               icon,
@@ -47,19 +42,12 @@ function WeatherList({ weathers }) {
                   state: {
                     date,
                     city,
-                    day:
-                      day + index > 6
-                        ? dayToday[counter]
-                        : dayToday[day + index],
+                    day: dt.format('dddd'),
                   },
                 }}
               >
                 <Li key={id}>
-                  <h4>
-                    {day + index > 6
-                      ? dayToday[counter++]
-                      : dayToday[day + index]}
-                  </h4>
+                  <h4>{dt.format('dddd')}</h4>
                   <Span>{weatherType}</Span>
                   <div>
                     <Img

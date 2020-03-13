@@ -1,11 +1,11 @@
-import { all, put, takeLatest, takeEvery, takeMaybe } from 'redux-saga/effects';
-
+import { put, takeLatest } from 'redux-saga/effects';
 import * as actions from './actions';
 
-import { GET_WEATHER_BY_CITY, GET_WEATHER_BY_CITY_CLICKED } from './constants';
+import { GET_WEATHER_BY_CITY } from './constants';
 // Individual exports for testing
 const d = new Date();
 const cHours = d.getHours();
+
 let timeSlot = '';
 if (cHours >= 0 && cHours < 3) {
   timeSlot = '00:00:00';
@@ -33,22 +33,22 @@ export function* weatherAppContainerListByDaySaga(action) {
     const data = yield fetch(url);
     const response = yield data.json();
     const fetchWeather = [];
-    for (let key in response.list) {
-      const dateWeather = response.list[key].dt_txt.split(' ');
-      if (dateWeather[1] === timeSlot) {
-        fetchWeather.push({
-          ...response.list[key].weather[0],
-          id: key,
-          main: response.list[key].weather[0].main,
-          icon: response.list[key].weather[0].icon,
-          temp_max: response.list[key].main.temp_max,
-          temp_min: response.list[key].main.temp_min,
-          date: dateWeather[0],
-          city,
-        });
-      }
-    }
-    yield put(actions.fetchWeatherSuccessAction(fetchWeather));
+    response.list.map((weatherList, index) => {
+      const dateWeather = weatherList.dt_txt.split(' ');
+      fetchWeather.push({
+        id: index,
+        main: weatherList.weather[0].main,
+        icon: weatherList.weather[0].icon,
+        temp_max: weatherList.main.temp_max,
+        temp_min: weatherList.main.temp_min,
+        time: dateWeather[1],
+        date: dateWeather[0],
+        city,
+      });
+    });
+    const weathers = fetchWeather.filter(weather => weather.time === timeSlot);
+
+    yield put(actions.fetchWeatherSuccessAction(weathers));
   } catch (error) {
     yield put(actions.fetchWeatherFailAction(error));
   }

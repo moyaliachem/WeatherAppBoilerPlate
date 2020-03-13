@@ -60,7 +60,10 @@ const render = messages => {
             <Route
               path="/hour"
               render={props => (
-                <HourlyForecast weatherClicked={props.location.state} />
+                <HourlyForecast
+                  weatherClicked={props.location.state}
+                  history={props.history}
+                />
               )}
             />
           </Switch>

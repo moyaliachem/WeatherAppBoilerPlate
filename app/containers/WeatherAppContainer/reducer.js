@@ -14,7 +14,8 @@ import {
 export const initialState = {
   weather: [],
   citySearch: '',
-  error: null,
+  error: '',
+  loading: true,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -25,12 +26,14 @@ const weatherAppContainerReducer = (state = initialState, action) =>
         break;
       case GET_WEATHER_SUCCESS:
         draft.weather = action.weather;
+        draft.loading = false;
         break;
       case GET_WEATHER_FAIL:
         draft.error = action.error;
         break;
       case GET_WEATHER_BY_CITY:
         draft.citySearch = action.city;
+        draft.loading = true;
         break;
     }
   });
