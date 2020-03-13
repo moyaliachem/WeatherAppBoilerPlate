@@ -10,6 +10,7 @@ import '@babel/polyfill';
 
 // Import all the third party stuff
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
@@ -17,9 +18,11 @@ import FontFaceObserver from 'fontfaceobserver';
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
 
-// Import root app
 import LanguageProvider from 'containers/LanguageProvider';
-import App from './containers/WeatherAppContainer/index';
+
+import HourlyForecast from './components/WeatherListHourlyForcast';
+// Import root app
+import WeatherComponent from './containers/WeatherAppContainer/index';
 
 // Import Language Provider
 
@@ -51,7 +54,16 @@ const render = messages => {
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
-          <App />
+          {/* <App /> */}
+          <Switch>
+            <Route exact path="/" component={WeatherComponent} />
+            <Route
+              path="/hour"
+              render={props => (
+                <HourlyForecast weatherClicked={props.location.state} />
+              )}
+            />
+          </Switch>
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,

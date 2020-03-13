@@ -1,8 +1,8 @@
-import { take, call, put, select, takeLatest } from 'redux-saga/effects';
+import { all, put, takeLatest, takeEvery, takeMaybe } from 'redux-saga/effects';
 
 import * as actions from './actions';
 
-import { GET_WEATHER_BY_CITY } from './constants';
+import { GET_WEATHER_BY_CITY, GET_WEATHER_BY_CITY_CLICKED } from './constants';
 // Individual exports for testing
 const d = new Date();
 const cHours = d.getHours();
@@ -25,36 +25,35 @@ if (cHours >= 0 && cHours < 3) {
   timeSlot = '21:00:00';
 }
 
-export function* weatherAppContainerSaga(action) {
+export function* weatherAppContainerListByDaySaga(action) {
   try {
-    yield put(actions.fetchWeatherStart());
-    const data = yield fetch(
-      `http://api.openweathermap.org/data/2.5/forecast?q=${
-        action.city
-      },Philippines&units=metric&appid=14c25030e41c023940363a0366a7e67f`,
-    );
+    const { city } = action;
+    const url = `http://api.openweathermap.org/data/2.5/forecast?q=${city},PH&units=metric&appid=14c25030e41c023940363a0366a7e67f`;
+    yield put(actions.fetchWeatherStartAction());
+    const data = yield fetch(url);
     const response = yield data.json();
     const fetchWeather = [];
     for (let key in response.list) {
       const dateWeather = response.list[key].dt_txt.split(' ');
-      console.log(dateWeather[1], timeSlot);
       if (dateWeather[1] === timeSlot) {
         fetchWeather.push({
           ...response.list[key].weather[0],
           id: key,
+          main: response.list[key].weather[0].main,
           icon: response.list[key].weather[0].icon,
           temp_max: response.list[key].main.temp_max,
           temp_min: response.list[key].main.temp_min,
-          date: response.list[key].dt_txt,
+          date: dateWeather[0],
+          city,
         });
       }
     }
-    yield put(actions.fetchWeatherSuccess(fetchWeather));
+    yield put(actions.fetchWeatherSuccessAction(fetchWeather));
   } catch (error) {
-    yield put(actions.fetchWeatherFail(error));
+    yield put(actions.fetchWeatherFailAction(error));
   }
 }
 
 export default function* weatherFetched() {
-  yield takeLatest(GET_WEATHER_BY_CITY, weatherAppContainerSaga);
+  yield takeLatest(GET_WEATHER_BY_CITY, weatherAppContainerListByDaySaga);
 }

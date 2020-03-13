@@ -5,7 +5,8 @@
  */
 
 import React, { memo, useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
@@ -15,8 +16,8 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 
 // AntD
-// import 'antd/dist/antd.css';
-import { Input } from 'antd';
+import 'antd/dist/antd.css';
+import { Input, Button } from 'antd';
 import { makeSelectWeatherAppContainer, setSelectedCity } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -51,23 +52,25 @@ export function WeatherAppContainer(props) {
           />
         </Helmet>
         <div>
-          <h1>Weather for the city of: {props.city}</h1>
+          <h1>Weather Forecast for the city of: {props.city}</h1>
         </div>
-        <WeatherList
-          weathers={props.weatherData.weather}
-          onClick={id => console.log(id)}
-        />
-        <Form onSubmit={searchCityHandler}>
-          <Input
-            name="City"
-            placeholder="Input a City"
-            value={searchACity}
-            onChange={event => {
-              setSearchACity(event.target.value);
-            }}
-          />
-          <button type="submit">Search</button>
-        </Form>
+        <div>
+          <Form onSubmit={searchCityHandler}>
+            <Input
+              size="default"
+              name="City"
+              placeholder="Input a City"
+              value={searchACity}
+              onChange={event => {
+                setSearchACity(event.target.value);
+              }}
+            />
+            <Button type="primary" htmlType="submit">
+              Search
+            </Button>
+          </Form>
+        </div>
+        <WeatherList weathers={props.weatherData.weather} />
       </WeatherApp>
     </div>
   );
@@ -75,7 +78,7 @@ export function WeatherAppContainer(props) {
 
 WeatherAppContainer.propTypes = {
   // dispatch: PropTypes.func.isRequired,
-  searchACity: PropTypes.string,
+  // searchACity: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -85,7 +88,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    onSearch: searchCity => dispatch(actions.fetchWeatherByCity(searchCity)),
+    onSearch: searchCity =>
+      dispatch(actions.fetchWeatherByCityAction(searchCity)),
   };
 }
 

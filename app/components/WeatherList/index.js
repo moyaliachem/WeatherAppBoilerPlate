@@ -6,14 +6,13 @@
  */
 
 import React, { memo } from 'react';
+import { Link } from 'react-router-dom';
 import { Li, Span, Img, Ul } from './styledComponents';
-import moment from 'moment';
 // import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
-function WeatherList({ onClick, weathers }) {
+function WeatherList({ weathers }) {
   const fullDate = new Date();
-
   const day = fullDate.getDay();
   const dayToday = [
     'Sunday',
@@ -24,41 +23,59 @@ function WeatherList({ onClick, weathers }) {
     'Friday',
     'Saturday',
   ];
-
   let counter = 0;
 
   return (
     <section className="weather-list">
       <h2>Weather</h2>
-      <Ul>
-        {!weathers
-          ? 'Not Found'
-          : weathers.map((ig, index) => {
-              const { id, icon, temp_max: tempMax, temp_max: tempMin } = ig;
-              return (
-                <Li
-                  key={id}
-                  onClick={ev => {
-                    ev.preventDefault();
-                    onClick(id);
-                  }}
-                >
+      {
+        <Ul>
+          {weathers.map((weatherList, index) => {
+            const {
+              id,
+              icon,
+              temp_max: tempMax,
+              temp_max: tempMin,
+              main: weatherType,
+              city,
+              date,
+            } = weatherList;
+            return (
+              <Link
+                to={{
+                  pathname: '/hour',
+                  state: {
+                    date,
+                    city,
+                    day:
+                      day + index > 6
+                        ? dayToday[counter]
+                        : dayToday[day + index],
+                  },
+                }}
+              >
+                <Li key={id}>
                   <h4>
                     {day + index > 6
                       ? dayToday[counter++]
                       : dayToday[day + index]}
-                    {console.log(dayToday[index])}
                   </h4>
-                  {console.log('INDEX', index, 'DAY', day)}
-                  <Img src={`http://openweathermap.org/img/wn/${icon}.png`} />
+                  <Span>{weatherType}</Span>
+                  <div>
+                    <Img
+                      src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+                    />
+                  </div>
                   <div>
                     <Span>{tempMax}°</Span>
                     <Span>{tempMin}°</Span>
                   </div>
                 </Li>
-              );
-            })}
-      </Ul>
+              </Link>
+            );
+          })}
+        </Ul>
+      }
     </section>
   );
 }
