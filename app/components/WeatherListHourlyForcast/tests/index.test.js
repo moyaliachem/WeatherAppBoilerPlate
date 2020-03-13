@@ -1,6 +1,6 @@
 /**
  *
- * Tests for ModalWeatherLis
+ * Tests for WeatherListHourlyForcast
  *
  * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
  *
@@ -10,12 +10,12 @@ import React from 'react';
 import { render } from 'react-testing-library';
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
-import ModalWeatherLis from '../index';
+import WeatherListHourlyForcast from '../index';
 
-describe('<ModalWeatherLis />', () => {
+describe('<WeatherListHourlyForcast />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<ModalWeatherLis />);
+    render(<WeatherListHourlyForcast />);
     expect(spy).not.toHaveBeenCalled();
   });
 
@@ -31,7 +31,7 @@ describe('<ModalWeatherLis />', () => {
   it.skip('Should render and match the snapshot', () => {
     const {
       container: { firstChild },
-    } = render(<ModalWeatherLis />);
+    } = render(<WeatherListHourlyForcast />);
     expect(firstChild).toMatchSnapshot();
   });
 });

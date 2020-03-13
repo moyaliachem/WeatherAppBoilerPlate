@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for ModalWeatherLis
+ * Asynchronously loads the component for WeatherListHourlyForcast
  *
  */
 

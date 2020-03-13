@@ -9,7 +9,9 @@ import {
   GET_WEATHER_SUCCESS,
   GET_WEATHER_FAIL,
   GET_WEATHER_BY_CITY,
-  // GET_WEATHER,
+  GET_WEATHER_BY_CITY_CLICKED,
+  GET_WEATHER_BY_CITY_SUCCESS_CLICKED,
+  GET_WEATHER_BY_CITY_FAIL_CLICKED,
 } from './constants';
 
 // export function fetchWeather(weather, city) {
@@ -19,26 +21,26 @@ import {
 //     city,
 //   };
 // }
-export function fetchWeatherStart() {
+export function fetchWeatherStartAction() {
   return {
     type: GET_WEATHER_START,
   };
 }
 
-export function fetchWeatherSuccess(weather) {
+export function fetchWeatherSuccessAction(weather) {
   return {
     type: GET_WEATHER_SUCCESS,
     weather,
   };
 }
-export function fetchWeatherFail(error) {
+export function fetchWeatherFailAction(error) {
   return {
     type: GET_WEATHER_FAIL,
     error,
   };
 }
 
-export function fetchWeatherByCity(city) {
+export function fetchWeatherByCityAction(city) {
   return {
     type: GET_WEATHER_BY_CITY,
     city,

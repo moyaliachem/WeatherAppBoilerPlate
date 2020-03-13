@@ -7,6 +7,7 @@ export const Li = styled.li`
   display: inline-block;
   justify-content: space-between;
   background-image: linear-gradient(skyblue, blue);
+  width: 170px;
   color: #e8e4c9;
 
   &:hover {
@@ -32,4 +33,8 @@ export const Img = styled.img`
 export const Ul = styled.ul`
   margin: 0 0;
   padding: 0 0 0 0;
+`;
+
+export const Section = styled.section`
+  text-align: center;
 `;
