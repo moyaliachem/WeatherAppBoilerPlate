@@ -62,7 +62,7 @@ function WeatherListHourlyForcast({ weatherClicked }) {
               icon,
               time,
               temp_max: tempMax,
-              temp_max: tempMin,
+              temp_min: tempMin,
               main: weatherType,
             } = weatherHourList;
             return (

@@ -30,7 +30,7 @@ function WeatherList({ weathers }) {
               id,
               icon,
               temp_max: tempMax,
-              temp_max: tempMin,
+              temp_min: tempMin,
               main: weatherType,
               city,
               date,
@@ -45,8 +45,9 @@ function WeatherList({ weathers }) {
                     day: dt.format('dddd'),
                   },
                 }}
+                key={id}
               >
-                <Li key={id}>
+                <Li>
                   <h4>{dt.format('dddd')}</h4>
                   <Span>{weatherType}</Span>
                   <div>

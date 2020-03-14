@@ -28,7 +28,7 @@ if (cHours >= 0 && cHours < 3) {
 export function* weatherAppContainerListByDaySaga(action) {
   try {
     const { city } = action;
-    const url = `http://api.openweathermap.org/data/2.5/forecast?q=${city},PH&units=metric&appid=14c25030e41c023940363a0366a7e67f`;
+    const url = `http://api.openweathermap.org/data/2.5/forecast?q=${city},Philippines&cnt=40&units=metric&appid=14c25030e41c023940363a0366a7e67f`;
     yield put(actions.fetchWeatherStartAction());
     const data = yield fetch(url);
     const response = yield data.json();
