@@ -25,17 +25,15 @@ function WeatherListHourlyForcast({ weatherClicked }) {
         const fetchHourDay = [];
         responseData.list.map((hourlyList, index) => {
           const dateWeather = hourlyList.dt_txt.split(' ');
-          if (dateWeather[0] === date) {
-            fetchHourDay.push({
-              id: index,
-              time: dateWeather[1],
-              icon: hourlyList.weather[0].icon,
-              temp_max: hourlyList.main.temp_max,
-              temp_min: hourlyList.main.temp_min,
-              main: hourlyList.weather[0].main,
-              date: dateWeather[0],
-            });
-          }
+          fetchHourDay.push({
+            id: index,
+            time: dateWeather[1],
+            icon: hourlyList.weather[0].icon,
+            temp_max: hourlyList.main.temp_max,
+            temp_min: hourlyList.main.temp_min,
+            main: hourlyList.weather[0].main,
+            date: dateWeather[0],
+          });
         });
         const weathers = fetchHourDay.filter(
           weatherHour => weatherHour.date === date,

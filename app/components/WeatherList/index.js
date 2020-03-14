@@ -13,17 +13,15 @@ import { Li, Span, Img, Ul } from './styledComponents';
 // import styled from 'styled-components';
 
 function WeatherList({ weathers }) {
-  let counter = 0;
-
   return (
     <section className="weather-list">
       <h2>Weather</h2>
       {
         <Ul>
-          {weathers.map(weatherList => {
+          {weathers.map((weatherList, index) => {
             const fullDate = new Date();
             const dt = Moment(fullDate, 'YYYY-MM-DD HH:mm:ss').add(
-              counter++,
+              index,
               'days',
             );
             const {
