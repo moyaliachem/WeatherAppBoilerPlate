@@ -74,7 +74,7 @@ export function WeatherAppContainer({ city, weatherData, onSearch }) {
             </Button> */}
           </Form>
         </div>
-        {!city ? <h1>City not found....</h1> : load}
+        {city === '' ? <h1>City not found....</h1> : load}
       </WeatherApp>
     </div>
   );
@@ -82,7 +82,7 @@ export function WeatherAppContainer({ city, weatherData, onSearch }) {
 
 WeatherAppContainer.propTypes = {
   onSearch: PropTypes.func.isRequired,
-  city: !PropTypes.string,
+  city: PropTypes.string,
   weatherData: PropTypes.object,
 };
 
