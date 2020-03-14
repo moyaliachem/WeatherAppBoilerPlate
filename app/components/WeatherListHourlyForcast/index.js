@@ -85,15 +85,15 @@ function WeatherListHourlyForcast({ weatherClicked }) {
               </Li>
             );
           })}
+          <div>
+            <Link to="/">
+              <Button type="primary">Back</Button>
+            </Link>
+          </div>
         </Ul>
       ) : (
         load
       )}
-      <div>
-        <Link to="/">
-          <Button type="primary">Back</Button>
-        </Link>
-      </div>
     </Section>
   );
 }
