@@ -22,10 +22,9 @@ function WeatherListHourlyForcast({ weatherClicked }) {
     fetch(url)
       .then(response => response.json())
       .then(responseData => {
-        const fetchHourDay = [];
-        responseData.list.map((hourlyList, index) => {
+        const fetchHourDay = responseData.list.map((hourlyList, index) => {
           const dateWeather = hourlyList.dt_txt.split(' ');
-          fetchHourDay.push({
+          return {
             id: index,
             time: dateWeather[1],
             icon: hourlyList.weather[0].icon,
@@ -33,7 +32,7 @@ function WeatherListHourlyForcast({ weatherClicked }) {
             temp_min: hourlyList.main.temp_min,
             main: hourlyList.weather[0].main,
             date: dateWeather[0],
-          });
+          };
         });
         const weathers = fetchHourDay.filter(
           weatherHour => weatherHour.date === date,

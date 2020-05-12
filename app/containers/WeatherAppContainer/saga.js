@@ -32,10 +32,9 @@ export function* weatherAppContainerListByDaySaga(action) {
     yield put(actions.fetchWeatherStartAction());
     const data = yield fetch(url);
     const response = yield data.json();
-    const fetchWeather = [];
-    response.list.map((weatherList, index) => {
+    const fetchWeather = response.list.map((weatherList, index) => {
       const dateWeather = weatherList.dt_txt.split(' ');
-      fetchWeather.push({
+      return {
         id: index,
         main: weatherList.weather[0].main,
         icon: weatherList.weather[0].icon,
@@ -44,7 +43,7 @@ export function* weatherAppContainerListByDaySaga(action) {
         time: dateWeather[1],
         date: dateWeather[0],
         city,
-      });
+      };
     });
     const weathers = fetchWeather.filter(weather => weather.time === timeSlot);
 
