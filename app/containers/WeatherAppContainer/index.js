@@ -16,6 +16,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 
 // AntD
 import 'antd/dist/antd.css';
+import styled from 'styled-components';
 import { Input } from 'antd';
 import './index.css';
 import { makeSelectWeatherAppContainer, setSelectedCity } from './selectors';
@@ -40,14 +41,21 @@ export function WeatherAppContainer({ city, weatherData, onSearch }) {
   //   event.preventDefault();
   //   props.onSearch(searchACity);
   // };
+  const H1 = styled.h1`
+    color: grey;
+  `;
+
+  const WeatherDiv = styled.div`
+    margin-top: 120px;
+  `;
   const { loading, weather } = weatherData;
-  let load = <h1 className="Load">Loading....</h1>;
+  let load = <H1 className="Load">Loading....</H1>;
   if (!loading) {
     load = <WeatherList weathers={weather} />;
   }
 
   return (
-    <div>
+    <WeatherDiv>
       <WeatherApp>
         <Helmet>
           <title>Weather Application</title>
@@ -57,7 +65,7 @@ export function WeatherAppContainer({ city, weatherData, onSearch }) {
           />
         </Helmet>
         <div>
-          <h1>Weather Forecast for the city of: {city}</h1>
+          <H1>WEATHER FORECAST</H1>
         </div>
         <div>
           <Form>
@@ -74,9 +82,9 @@ export function WeatherAppContainer({ city, weatherData, onSearch }) {
             </Button> */}
           </Form>
         </div>
-        {city === '' ? <h1>City not found....</h1> : load}
+        {city === '' ? <H1>City not found....</H1> : load}
       </WeatherApp>
-    </div>
+    </WeatherDiv>
   );
 }
 

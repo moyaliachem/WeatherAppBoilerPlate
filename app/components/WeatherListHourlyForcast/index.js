@@ -8,7 +8,7 @@ import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
-import { Li, Span, Img, Ul, Section } from './styledComponents';
+import { Li, Span, Img, Ul, Section, H2, H1, CityH1 } from './styledComponents';
 import './loader.css';
 import 'antd/dist/antd.css';
 
@@ -42,15 +42,15 @@ function WeatherListHourlyForcast({ weatherClicked }) {
       });
   }, []);
 
-  const load = <h1 className="Load">Loading...</h1>;
+  const load = <H1 className="Load">Loading...</H1>;
 
   const { city, day, date } = weatherClicked;
   return (
     <Section className="weather-list">
-      <h1> {city}</h1>
-      <h3>
+      <CityH1>{city}</CityH1>
+      <H2>
         HOURLY FORECAST - {day} {date}
-      </h3>
+      </H2>
       {!loading ? (
         <Ul>
           {hourly.map(weatherHourList => {
@@ -84,7 +84,18 @@ function WeatherListHourlyForcast({ weatherClicked }) {
           })}
           <div>
             <Link to="/">
-              <Button type="primary">Back</Button>
+              <Button
+                type="primary"
+                size="large"
+                shape="round"
+                style={{
+                  background: 'black',
+                  borderColor: 'grey',
+                  color: '#e8e4c9',
+                }}
+              >
+                Back
+              </Button>
             </Link>
           </div>
         </Ul>

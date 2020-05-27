@@ -1,26 +1,41 @@
 import styled from 'styled-components';
 
 export const Li = styled.li`
-  margin: 5px;
-  padding: 5px 5px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.26);
+  margin: 3px;
+  padding: 3px 3px;
   display: inline-block;
   justify-content: space-between;
-  background-image: linear-gradient(skyblue, blue);
   width: 170px;
-  color: #e8e4c9;
+  color: white;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
-    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-    color: #e8e4c9;
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+    background-color: #ffb268;
   }
+`;
+
+export const DateFormat = styled.h1`
+  color: grey;
+`;
+
+export const H1 = styled.h1`
+  font-size: 20px;
+  text-align: center;
+  color: white;
 `;
 
 export const Span = styled.span`
   margin: 5px;
   padding: 5px 5px;
-  color: #e8e4c9;
+  color: white;
 `;
 
 export const Img = styled.img`

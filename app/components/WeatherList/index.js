@@ -8,14 +8,14 @@
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import Moment from 'moment';
-import { Li, Span, Img, Ul } from './styledComponents';
+import { Li, Span, Img, Ul, H1, DateFormat } from './styledComponents';
 // import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
 function WeatherList({ weathers }) {
   return (
     <section className="weather-list">
-      <h2>Weather</h2>
+      <DateFormat>{Moment().format('LLLL')}</DateFormat>
       {
         <Ul>
           {weathers.map((weatherList, index) => {
@@ -46,7 +46,7 @@ function WeatherList({ weathers }) {
                 key={id}
               >
                 <Li>
-                  <h4>{dt.format('dddd')}</h4>
+                  <H1>{dt.format('dddd')}</H1>
                   <Span>{weatherType}</Span>
                   <div>
                     <Img
