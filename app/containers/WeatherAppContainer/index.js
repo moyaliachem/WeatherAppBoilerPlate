@@ -45,9 +45,6 @@ export function WeatherAppContainer({ city, weatherData, onSearch }) {
     color: grey;
   `;
 
-  const WeatherDiv = styled.div`
-    margin-top: 120px;
-  `;
   const { loading, weather } = weatherData;
   let load = <H1 className="Load">Loading....</H1>;
   if (!loading) {
@@ -55,7 +52,7 @@ export function WeatherAppContainer({ city, weatherData, onSearch }) {
   }
 
   return (
-    <WeatherDiv>
+    <div>
       <WeatherApp>
         <Helmet>
           <title>Weather Application</title>
@@ -84,7 +81,7 @@ export function WeatherAppContainer({ city, weatherData, onSearch }) {
         </div>
         {city === '' ? <H1>City not found....</H1> : load}
       </WeatherApp>
-    </WeatherDiv>
+    </div>
   );
 }
 

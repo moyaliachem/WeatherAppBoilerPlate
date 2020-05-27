@@ -44,7 +44,6 @@ export const Ul = styled.ul`
 `;
 
 export const Section = styled.section`
-  margin-top: 120px;
   text-align: center;
   vertical-align: middle;
 `;
